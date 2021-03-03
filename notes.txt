@@ -1,0 +1,11 @@
+>dotnet new mvc
+>dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+>dotnet add package Microsoft.EntityFrameworkCore.Tools
+>dotnet ef migrations add CreateDatabase
+>dotnet ef database update
+
+
+
+
+
+

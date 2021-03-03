@@ -1,0 +1,15 @@
+>dotnet new mvc
+>dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+>dotnet add package Microsoft.EntityFrameworkCore.Tools
+
+
+sqlite>sqlite .open <-- Create DB in sqlite cmd
+
+>dotnet ef migrations add CreateDatabase
+>dotnet ef database update
+
+
+
+
+
+

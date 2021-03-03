@@ -1,0 +1,24 @@
+﻿@model Backend.ModelView.IndexModelView
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    <div class="row">
+    @foreach(var item in Model.Products)
+    {
+        <div class="col-3 store-item">
+            <img src="/images/@(item.ID).jpg">
+            <h4>@item.Name</h4>
+            <h5>Price: @item.Price</h5>
+
+        </div>
+    }
+    </div>
+</div>
