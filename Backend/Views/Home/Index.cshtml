@@ -9,16 +9,17 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<div>
+<form method="get" asp-controller="Home" asp-action="Details">
     <div class="row">
     @foreach(var item in Model.Products)
     {
         <div class="col-3 store-item">
             <img src="/images/@(item.ID).jpg">
+            <hr/>
             <h4>@item.Name</h4>
             <h5>Price: @item.Price</h5>
-
+            <button type="submit" class="btn btn-primary" name="id" value="@item.ID">פרטים</button>
         </div>
     }
     </div>
-</div>
+</form>

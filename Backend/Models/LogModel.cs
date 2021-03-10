@@ -1,14 +1,15 @@
+using System;
+
 namespace Backend.Models
 {
-    public class ProductModel
+    public class LogModel
     {
-        int id;
-        string name;
-        string description;
-        short price;
-        string image;
-
-        public int ID
+        uint id;
+        string file;
+        private string description;
+        DateTime date;
+        
+        public uint ID
         {
             get
             {
@@ -20,15 +21,15 @@ namespace Backend.Models
             }
         }
 
-        public string Name
+        public string File
         {
             get
             {
-                return this.name;
+                return this.file;
             }
             set
             {
-                this.name = value;
+                this.file = value;
             }
         }
 
@@ -40,32 +41,28 @@ namespace Backend.Models
             }
             set
             {
-                this.name = description;
+                this.description = value;
             }
         }
 
-        public short Price
+        public DateTime Date
         {
             get
             {
-                return this.price;
+                return this.date;
             }
             set
             {
-                this.price = value;
+                this.date = value;
             }
         }
-
-        public string Image
+        
+        
+        public LogModel(string file, string description, DateTime date)
         {
-            get
-            {
-                return this.image;
-            }
-            set
-            {
-                this.image = value;
-            }
+            this.file = file;
+            this.description = description;
+            this.date = date;
         }
     }
 }

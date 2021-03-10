@@ -38,6 +38,17 @@ namespace Backend.Controllers
             return View(modelView);
         }
 
+        public IActionResult Details(int id)
+        {
+            DataContext context = new DataContext();
+
+            //neet to passing data between to pages to skip this db read
+            ProductModel product = context.Products.SingleOrDefault(i => i.ID == id);
+
+            //DetalisModelView modelView = new DetailsModelView(product);
+            return View(product);
+        }
+
         public IActionResult Privacy()
         {
             return View();

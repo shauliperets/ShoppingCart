@@ -1,0 +1,86 @@
+@model Backend.ModelView.AdministrationModelView
+
+<form>
+    @Html.DropDownListFor(model => model.Products,
+                        new SelectList(Model.Products, "ID", "Name"),
+                        new { @class = "form-control" }
+                        )
+    <hr>
+    <select name="ProductList" class="custom-select" multiple>
+        @foreach(var item in Model.Products)
+        {
+            <option value="@(item.ID)">@(item.Name)</option>
+        }
+    </select>
+
+    <div class="form-group">
+        
+
+        <label for="product-name">שם מוצר</label>
+        <input id="product-name" type="text" class="form-control">
+
+        <label for="product-price">מחיר</label>
+        <input id="product-price" type="text" class="form-control">
+
+        <label for="product-description">תאור</label>
+        <input id="product-description" type="text" class="form-control">
+
+        <button id="product-save" class="btn btn-primary">שמור</button>
+    </div>
+    <input id="product-id" type="text" class="form-control">
+</form>
+
+@section scripts{
+    <script>
+        var products = @Html.Raw(Json.Serialize(Model.Products));
+        var index;
+
+        //products[0].name = "Nikon111";
+        
+        $('select[name="ProductList"]').change(function () {
+            index = $(this).val();
+            
+            $('#product-id').val(products[index - 1].id);
+            $('#product-name').val(products[index - 1].name);
+            $('#product-price').val(products[index - 1].price);
+            $('#product-description').val(products[index - 1].description);
+
+            //console.log('index - 1 ->', index - 1);
+            //products[index - 1].name = $('#product-name').val();
+            //console.log("input.name", $('#product-name').val());
+            //console.log('on change ->', products);
+            
+        });
+
+        $('#product-save').on("click", function(e) {
+            e.preventDefault();
+            products[index - 1].id = $('#product-id').val();
+            products[index - 1].name = $('#product-name').val();
+            products[index - 1].price = $('#product-price').val();
+            products[index - 1].description = $('#product-description').val();
+
+            var data = { 
+                         'id': products[index - 1].id,
+                         'name': products[index - 1].name,
+                         'price': products[index - 1].price,
+                         'description': products[index - 1].description
+                       };
+
+            console.log('data ->', data);
+            
+            $.ajax({
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                data: data,
+                //dataType: "json",
+                url: '/api/product/',
+                success: function (result) {
+
+                },
+                error: function (req, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+}
